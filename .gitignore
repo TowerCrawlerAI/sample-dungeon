@@ -1,0 +1,8 @@
+# Build artifacts — LFR is emitted, never authored
+*.lua
+*.lua.bak
+
+# Editor + OS
+*.swp
+*.swo
+.DS_Store
