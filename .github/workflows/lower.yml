@@ -1,0 +1,43 @@
+name: Lower floor.lua
+
+# Runs on every push and PR, and can be triggered manually.
+# Produces build/floor.lua as a downloadable artifact.
+#
+# TODO(F4): once fml-parser cuts a release, pin to that release tag here
+#           instead of tracking @main.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lower:
+    name: Lower Bone Garden FML → floor.lua
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sample-dungeon
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install fml-parser
+        # Interim: install from main until F4 ships a tagged release.
+        # TODO(F4): replace with `pip install fml-parser==<version>` once available.
+        run: |
+          pip install "fml_parser @ git+https://github.com/TowerCrawlerAI/fml-parser@main"
+
+      - name: Lower index.md → build/floor.lua
+        run: make lower
+
+      - name: Upload floor.lua artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: floor-lua
+          path: build/floor.lua
+          if-no-files-found: error
+          retention-days: 30
