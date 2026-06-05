@@ -3,6 +3,7 @@
 - kind: liquid
 - at_location: garden
 - aliases: [water, spring, spring water, rib, spring rib]
+- portable: false
 - drinkable: true
 - fillable_source: true
 - charges: 1

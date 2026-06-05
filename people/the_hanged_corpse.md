@@ -5,6 +5,7 @@
 - cr: 0
 - type: undead
 - at_location: garden
+- portable: false
 - disposition: cryptic, oracular
 - senses: blindsight 60 ft
 - languages: all (understands; speaks only when answering)
