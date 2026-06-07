@@ -18,13 +18,15 @@
 ###### On Open
 
 ```luau
-engine.set_property(ctx.noun.entity_id, "state", "open")
+-- om reaction: ctx.target is the node the event fired on (this door);
+-- engine.set_prop writes the graph node's own property.
+engine.set_prop(ctx.target, "state", "open")
 engine.output("You plant your shoulder against the stone slab and push. It grinds slowly on its pivot — a deep, resonant groan that echoes down the tunnels — and swings open. The way to the crypt is clear.")
 ```
 
 ###### On Close
 
 ```luau
-engine.set_property(ctx.noun.entity_id, "state", "closed")
+engine.set_prop(ctx.target, "state", "closed")
 engine.output("You heave the stone slab back into place. It seats itself with a low thud.")
 ```
