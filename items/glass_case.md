@@ -28,35 +28,25 @@
 
 #### Triggers
 
-###### InsteadOf Attack
+###### Before Attack
 
 ```luau
--- Bubble exemplar: the glass case intercepts Attack when the target is
--- inside it (the case is in the noun's bubble chain).
--- Break the case, allow the contents to be accessed.
-if self.open ~= "true" then
-    engine.set_property(self.entity_id, "broken", "true")
-    engine.set_property(self.entity_id, "open", "true")
-    engine.output("The glass shatters; the contents tumble free.")
-    engine.halt_action()
+-- Reach-path interception (om): the case sits between the attacker and the ring
+-- inside it. Attacking through a closed case shatters the case instead — the
+-- attack is absorbed (veto), and the case is left broken + open so the contents
+-- can then be taken. ctx.self is the case. (Fires once `attack` exists — v0.2.)
+if not om.get(ctx.self, "open") then
+    engine.set_prop(ctx.self, "broken", true)
+    engine.set_prop(ctx.self, "open", true)
+    ctx:veto("The glass shatters; the contents tumble free.")
 end
 ```
 
-###### Test Take
+###### Before Take
 
 ```luau
--- When closed (and not broken), block taking items from inside.
-if self.open ~= "true" and self.broken ~= "true" then
-    engine.fail_test("glass case sealed")
-end
-```
-
-###### InsteadOf Take
-
-```luau
--- Companion: emit the refusal when case is sealed.
-if self.open ~= "true" and self.broken ~= "true" then
-    engine.output("The glass case is sealed; you'd need to break it open first.")
-    engine.halt_action()
+-- Block taking the ring while the case is sealed (not open and not broken).
+if not om.get(ctx.self, "open") and not om.get(ctx.self, "broken") then
+    ctx:veto("The glass case is sealed; you'd need to break it open first.")
 end
 ```

@@ -16,25 +16,14 @@
 
 #### Triggers
 
-###### Test Take
+###### Before Take
 
 ```luau
--- Bubble exemplar: block taking items from inside the sarcophagus when closed.
--- The noun is the item being taken; this trigger fires because the sarcophagus
--- is the item's container (it is in the bubble chain).
--- When open, do nothing (let Test proceed normally).
-if self.open ~= "true" then
-    engine.fail_test("sarcophagus closed")
-end
-```
-
-###### InsteadOf Take
-
-```luau
--- Companion to Test Take: emit the refusal message when the sarcophagus is
--- closed and halt the action so no further stages fire.
-if self.open ~= "true" then
-    engine.output("The sarcophagus is closed; you can't reach inside.")
-    engine.halt_action()
+-- Reach-path interception (om): the sarcophagus sits between the actor and any
+-- item inside it, so this Before-stage SELF behaviour fires when something in it
+-- is taken. While closed, veto the take. ctx.self is the sarcophagus (its own
+-- `open` state); ctx.target is the item being taken.
+if not om.get(ctx.self, "open") then
+    ctx:veto("The sarcophagus is closed; you can't reach inside.")
 end
 ```
