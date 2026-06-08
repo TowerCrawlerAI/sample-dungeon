@@ -20,6 +20,15 @@ jobs:
       - name: Checkout sample-dungeon
         uses: actions/checkout@v4
 
+      - name: Checkout stdlib (the `[stdlib](stdlib)` import dependency)
+        # The floor imports the stdlib catalog; CI has no sibling clone, so fetch
+        # it and point the parser at it via FML_STDLIB_PATH (resolution order in
+        # fml_parser _resolve_import_path). TODO(F4): pin to a released stdlib.
+        uses: actions/checkout@v4
+        with:
+          repository: TowerCrawlerAI/stdlib
+          path: _stdlib
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -32,6 +41,8 @@ jobs:
           pip install "fml_parser @ git+https://github.com/TowerCrawlerAI/fml-parser@main"
 
       - name: Lower index.md → build/floor.lua
+        env:
+          FML_STDLIB_PATH: ${{ github.workspace }}/_stdlib/index.md
         run: make lower
 
       - name: Upload floor.lua artifact

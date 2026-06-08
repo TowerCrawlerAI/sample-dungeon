@@ -2,7 +2,7 @@
 
 - underground: true
 - level: -1
-- dark_level: normal
+- luminosity: 0
 - water: true
 - exits:
   - up: ossuary
@@ -19,15 +19,3 @@
 > of the emptied niches, and a faint smell of char suggests someone burned
 > documents here not long ago.
 
-#### Features
-
-##### Tallow Stub
-
-- kind: light_source
-- lightable: true
-- brightness: dim
-- lit: true
-- aliases: [stub, candle, candle stub, tallow candle]
-
-> A half-burned tallow stub wedged into an iron wall-ring, melted nearly flat.
-> It still has enough wick to take a flame.

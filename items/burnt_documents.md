@@ -2,8 +2,8 @@
 
 - kind: item
 - at_location: catacombs
-- portable: false
-- takeable: false
+- portable: true
+- takeable: true
 - readable: true
 - text: The fragments are barely legible — most of the text is lost to ash. Squinting at the largest surviving piece, you make out a partial word at the edge where the fire did not quite reach: "KONOMI". The rest is gone.
 - aliases: [burnt documents, documents, papers, charred papers, charred fragments, fragments, ash, ashes]
