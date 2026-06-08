@@ -18,6 +18,7 @@
 [Burnt Documents](items/burnt_documents.md)
 [Stale Biscuit](items/stale_biscuit.md)
 [Iron Mechanism](items/iron_mechanism.md)
+[Tallow Stub](items/tallow_stub.md)
 [Stone Door](items/stone_door.md)
 
 [Entry](rooms/entry.md)

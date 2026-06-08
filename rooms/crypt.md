@@ -2,7 +2,7 @@
 
 - underground: true
 - level: -2
-- dark_level: normal
+- luminosity: 0
 - exits:
   - north: twisting_tunnel_b1
   - west:

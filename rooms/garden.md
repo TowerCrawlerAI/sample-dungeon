@@ -2,6 +2,8 @@
 
 - exits:
   - north: [Entry](#Entry)
+- outdoor: true
+- luminosity: 10
 - adjudicator: The Garden is one logical room in the sim, but contains three distinct points of interest — the southeast spring ([Bone Construct](#Bone%20Construct) + [Spring Water](#Spring%20Water)), the eastern edge ([The Hanged Corpse](#The%20Hanged%20Corpse)), and the open silt itself (wandering encounters). Parties can engage any subset; none is required.
 
 > The Garden proper — the flat silt expanse and bone forest that the [Entry](#Entry) gate opens into. Beyond the floor's two main destinations, the Garden is alive with smaller dangers and small mercies.
