@@ -4,6 +4,8 @@
 - at_location: sarcophagus
 - portable: true
 - takeable: true
+- damage: "1d8+2"
+- damage_type: slashing
 - aliases: [sword, blade, bone-hilted sword, bone hilted sword, long blade]
 
 > A slender blade, longer than a shortsword by several inches, forged
@@ -11,14 +13,5 @@
 > hilt is a single piece of carved bone — not assembled from scraps
 > like the Skull King's constructs, but shaped from one continuous
 > piece, warm to the touch in a way that cold stone should not allow.
-> Whoever placed this here intended it to stay.
-
-#### Triggers
-
-###### After Attack With
-
-```luau
--- Preposition-suffix trigger: fires when this sword is used as the instrument
--- in "hit <target> with sword". ctx.noun is the target; ctx.noun_2 is this sword.
-engine.output("The bone hilt grows warm as the blade strikes home.")
-```
+> Whoever placed this here intended it to stay. In the hand it is a fine slashing
+> weapon (1d8+2) — and to the Skull King it is anathema: a single hit unmakes him.
