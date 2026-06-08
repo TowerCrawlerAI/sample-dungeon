@@ -15,9 +15,16 @@
 
 #### Triggers
 
-###### After Enter
+###### On Enter
 
-- when: not flag(throne_audience_started)
-
-[Throne Audience](#throne_audience)
-Set [throne_audience_started](flag:throne_audience_started)
+```luau
+-- Throne Audience: entering the Hall springs the fight. The Skull King and his
+-- archer are flagged `hostile`, so emitting BeginCombat lets the dnd5e layer
+-- open an enemies-first initiative encounter (the engine materialises the
+-- hostility edges to the player). Fires once.
+if not wyrd.get_world("throne_audience_started") then
+    wyrd.set_world("throne_audience_started", "true")
+    wyrd.say("The Skull King stirs on his throne. A skeleton archer raises its bow from the gallery above. He regards you with empty eye sockets and speaks in a measured, resonant voice: \"Why have you come?\"")
+    wyrd.emit(ctx.place or ctx.target, "BeginCombat", { actor = ctx.actor })
+end
+```
