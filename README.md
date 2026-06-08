@@ -28,7 +28,7 @@ The Bone Garden FML tree must be *lowered* to a Lua floor resource (`floor.lua`)
 
 ```bash
 # Install fml-parser (once):
-pip install "fml_parser @ git+https://github.com/TowerCrawlerAI/fml-parser@main"
+pip install "fml_parser @ git+https://github.com/TowerCrawlerAI/clotho@main"
 
 # Lower:
 make lower          # writes build/floor.lua
@@ -41,14 +41,14 @@ The Makefile target is incremental — it only re-lowers when `index.md` changes
 
 ## Dependencies
 
-Sample-dungeon imports the `stdlib` repo's FML for verb rules + kind definitions. Lower via `fml-parser`. Load lowered LFR via `engine-core`'s `crawler-engine` binary.
+Sample-dungeon imports the `stdlib` repo's FML for verb rules + kind definitions. Lower via `clotho`. Load lowered LFR via `wyrd`'s `wyrd` binary.
 
 ## Companion repos
 
 Under `TowerCrawlerAI/`:
-- [`engine-core`](../engine-core) — C engine + Luau VM
+- [`wyrd`](../wyrd) — C engine + Luau VM
 - [`stdlib`](../stdlib) — FML verb/kind catalog
-- [`fml-parser`](../fml-parser) — FML → LFR emitter
+- [`clotho`](../clotho) — FML → LFR emitter
 - [`wiki`](../wiki) — design docs + FML spec
 
 ## The principle

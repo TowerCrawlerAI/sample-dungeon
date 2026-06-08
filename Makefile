@@ -1,7 +1,7 @@
 .PHONY: lower clean
 
 # Lower the Bone Garden FML tree to a Lua floor resource (LFR).
-# Requires fml-parser: pip install "fml_parser @ git+https://github.com/TowerCrawlerAI/fml-parser@main"
+# Requires fml-parser: pip install "fml_parser @ git+https://github.com/TowerCrawlerAI/clotho@main"
 # or locally:           pip install -e /path/to/fml-parser
 
 lower: build/floor.lua
