@@ -32,10 +32,19 @@ Block the damage
 ###### On Answer
 
 ```luau
--- Fired by the `answer` verb when the player speaks the riddle's answer. The
--- corpse imparts the Skull King's true name (the same flag the Sigil teaches).
-engine.output("The corpse's jaw works without breath: 'Yesss. That is the shape of it.' It exhales a single word you somehow know for a name — ALDRIC — and the noose creaks as the body finally stills. You have learned the Skull King's true name.")
-engine.set_world("skull_king_true_name", "true")
+-- Fired by the `answer` verb (Wyrd path): ctx is the event payload
+-- { actor, target = this corpse, phrase = the spoken words }. The corpse JUDGES
+-- the phrase here (the engine only carries the words), and on the riddle's
+-- answer imparts the Skull King's true name — the same `skull_king_true_name`
+-- flag the Sigil teaches. Once per party: the answer slot is consumed.
+local said = string.lower(ctx.phrase or "")
+if said == "silence" or said == "the silence" or said == "quiet" or said == "stillness" then
+    engine.set_world("skull_king_true_name", "true")
+    engine.set_prop(ctx.target, "awaiting_answer", false)   -- consume (once per party)
+    engine.output("The corpse's jaw works without breath: 'Yesss. That is the shape of it.' It exhales a single word you somehow know for a name — ALDRIC — and the noose creaks as the body finally stills. You have learned the Skull King's true name.")
+else
+    engine.output("The corpse's jaw stays shut. That is not the shape of the answer.")
+end
 return true
 ```
 
