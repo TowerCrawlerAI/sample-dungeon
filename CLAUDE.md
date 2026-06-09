@@ -19,14 +19,14 @@ Three victory paths (it's the fixture that proves the engine works end-to-end):
 The engine loads a *lowered* LFR, not the markdown:
 
 ```bash
-pip install -e ../fml-parser
+pip install -e ../clotho
 make lower            # → build/floor.lua  (python -m fml_parser lower index.md)
 # run it once the engine + stdlib are assembled:
-#   crawler build/floor.lua --stdlib <stdlib.lua>   (then feed JSONL on stdin)
+#   wyrd build/floor.lua --stdlib <stdlib.lua>   (then feed JSONL on stdin)
 ```
 
-CI (`.github/workflows/lower.yml`) lowers + uploads `floor.lua` as an artifact; engine-core's assembly
-bundles it with `crawler` + the lowered stdlib into the runnable test program.
+CI (`.github/workflows/lower.yml`) lowers + uploads `floor.lua` as an artifact; wyrd's assembly
+bundles it with the `wyrd` binary + the lowered stdlib into the runnable test program.
 
 ## Its role in v0.1
 

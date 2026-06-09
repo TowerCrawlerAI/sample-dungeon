@@ -5,7 +5,7 @@
 #   OUTPUT  optional path for the output file (default: build/floor.lua)
 #
 # Requires fml-parser to be installed:
-#   pip install "fml_parser @ git+https://github.com/TowerCrawlerAI/fml-parser@main"
+#   pip install "fml_parser @ git+https://github.com/TowerCrawlerAI/clotho@main"
 # or from a local checkout:
 #   pip install -e /path/to/fml-parser
 

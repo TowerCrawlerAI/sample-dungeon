@@ -38,7 +38,7 @@ jobs:
         # Interim: install from main until F4 ships a tagged release.
         # TODO(F4): replace with `pip install fml-parser==<version>` once available.
         run: |
-          pip install "fml_parser @ git+https://github.com/TowerCrawlerAI/fml-parser@main"
+          pip install "fml_parser @ git+https://github.com/TowerCrawlerAI/clotho@main"
 
       - name: Lower index.md → build/floor.lua
         env:
