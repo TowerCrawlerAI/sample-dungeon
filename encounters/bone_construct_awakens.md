@@ -9,14 +9,10 @@
 
 > The [Bone Construct](#Bone%20Construct) hauls itself from the silt around the rib in the southeast of the [Garden](#Garden), water sluicing from its joints. It fights to the death; the party can break off the engagement only by leaving the spring's immediate vicinity.
 
-#### Triggers
+#### Implementation notes
 
-###### On Start
-
-```luau
-local self_id = _find_entity("bone_construct_awakens")
-if self_id then
-    engine.set_property(self_id, "triggered", "true")
-end
-engine.output("The great rib in the silt shudders. The Bone Construct hauls itself free of the earth, water streaming from its joints, and turns toward you.")
-```
+Wired in the entities: [Spring Water](#Spring%20Water)'s `On Touch` (touching
+the rib wakes the [Bone Construct](#Bone%20Construct) — sets `awake` +
+`hostile`, emits `BeginCombat`) and the construct's own `On Damage` (striking
+it while dormant wakes it the same way). The engagement can be broken off by
+leaving the Garden — encounters are room-bound, so the leash falls out free.

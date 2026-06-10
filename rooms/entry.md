@@ -22,8 +22,38 @@
 
 #### Triggers
 
-###### After Enter
+###### On Enter
 
-- when: time_in_room(party) is greater than 10 and noise_level(party) is greater than or equal to 2
-
-[Gate Ambush](#gate_ambush)
+```luau
+-- Gate Ambush: "lingered or loud" lowers to the Nth visit — a party that keeps
+-- milling about the gate draws the things beneath the silt. One-shot. The
+-- threshold (5) sits safely above any victory walkthrough (max 4 Entry visits).
+-- The scavenger pack (3 — the wandering-table band; stat block:
+-- people/skeleton_scavenger.md) is spawned here at ambush time: lowering
+-- creates one node per entity, so the pack is cloned from the monster
+-- prototype rather than pre-seeded.
+local room = ctx.place or ctx.target
+local visits = (tonumber(wyrd.get_world("entry_visits") or "0") or 0) + 1
+wyrd.set_world("entry_visits", tostring(visits))
+if visits >= 5 and not wyrd.get_world("gate_ambush_started") then
+    wyrd.set_world("gate_ambush_started", "true")
+    local proto = wyrd.named("monster") or wyrd.named("actor")
+    for _ = 1, 3 do
+        local s = wyrd.create(proto)
+        wyrd.set(s, "name", "Skeleton Scavenger")
+        wyrd.set(s, "aliases", "|scavenger|scavengers|skeleton|")
+        wyrd.set(s, "hp", 13)
+        wyrd.set(s, "ac", 13)
+        wyrd.set(s, "attack_bonus", 4)
+        wyrd.set(s, "damage", "1d6+2")
+        wyrd.set(s, "damage_type", "piercing")
+        wyrd.set(s, "init_bonus", 2)
+        wyrd.set(s, "vuln_bludgeoning", true)
+        wyrd.set(s, "immune_poison", true)
+        wyrd.set(s, "hostile", true)
+        wyrd.relate("in", s, room)
+    end
+    wyrd.say("The silt erupts. Skeleton scavengers burst from beneath the surface in a ring around you, grinding joints already reaching. There is no cover at this gate.")
+    wyrd.emit(room, "BeginCombat", { actor = ctx.actor })
+end
+```

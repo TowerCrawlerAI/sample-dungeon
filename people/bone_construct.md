@@ -1,6 +1,19 @@
 # Bone Construct
 
+- kind: npc
 - awake: false
+- hostile: false
+- at_location: garden
+- init_bonus: -1
+- attack_bonus: 7
+- damage: "2d6+4"
+- damage_type: bludgeoning
+- attacks: 2
+- resist_bludgeoning: true
+- resist_piercing: true
+- resist_slashing: true
+- immune_poison: true
+- immune_psychic: true
 - ac: 15
 - hp: 85
 - cr: 4
@@ -28,14 +41,35 @@
 
 > The Bone Construct cannot move more than 30 ft. from the rib that wakes it. If forced beyond that range, it collapses to inert bones for 1 hour.
 
+#### Implementation notes
+
+- **Waking** — [Spring Water](#Spring%20Water)'s `On Touch` trigger: touching
+  the rib sets `awake` + `hostile` and emits `BeginCombat` (the dnd5e
+  enemies-first ambush). Striking the dormant construct directly also wakes it
+  (the `On Damage` trigger below).
+- **Bound to the Spring** — encounters are room-bound in the engine, so the
+  leash falls out for free: leaving the Garden drops the fight and the
+  construct never pursues. The 30-ft collapse rule and Bone Storm stay prose
+  (elaborations, deferred like the Skull King's legendary actions).
+
 #### Triggers
 
-###### Before Move
+###### On Damage
 
-**If** distance from self to [Spring Rib](#Garden) is greater than 30:
-  Apply inert to self
-  Block the move
-**End.**
+```luau
+-- A blow wakes the dormant guardian: it stands and turns hostile. NO
+-- BeginCombat emit here — OnDamage fires inside the attack resolution, and
+-- opening + advancing an encounter mid-resolve would let a faster foe act
+-- twice (the attack behaviour advances again after resolving). The fight
+-- opens player-initiated on the next strike instead; the wake blow is free.
+-- (Touching the rib is the usual wake path — see Spring Water's On Touch.)
+local bc = ctx.target
+if wyrd.get(bc, "awake") ~= true then
+    wyrd.set(bc, "awake", true)
+    wyrd.set(bc, "hostile", true)
+    wyrd.say("The half-buried thing you struck is not a ruin. It is a sleeper. The construct heaves itself upright, silt cascading from its ribs.")
+end
+```
 
 #### Actions
 

@@ -24,43 +24,9 @@
 
 > A massive curved rib half-buried in the silt, hollow at its peak. Spring water rises from inside it. The water is cold and shockingly clear against the grey silt. If you had something to carry it in, you could take a measure of it with you.
 
-#### Triggers
+#### Implementation notes
 
-###### On Touch
-
-```luau
--- Only react when the noun is the spring rib.
-if ctx.noun == nil or ctx.noun.id ~= "spring_rib" then
-    return -- nil: let caller show default output
-end
-
--- Find the Bone Construct by scanning entities in global scope.
-local bc_id = nil
-local all_ids = engine.entities_in_scope("global", ctx.room.entity_id)
-for _, eid in ipairs(all_ids) do
-    local ent = engine.query_entity(eid)
-    if ent ~= nil and ent.id == "bone_construct" then
-        bc_id = eid
-        break
-    end
-end
-
-if bc_id == nil then
-    -- Construct not registered — fall through to default touch output.
-    return -- nil: let caller show default output
-end
-
--- Idempotency guard: already awake.
-local bc = engine.query_entity(bc_id)
-if bc ~= nil and bc.awake == "true" then
-    engine.output("The rib is silent. The water still runs cold.")
-    return true -- handled: suppress default output
-end
-
--- Awaken the construct: place it in the room and mark it awake.
-engine.set_property(bc_id, "awake", "true")
-engine.move_actor(bc_id, ctx.room.entity_id)
-engine.output("The rib trembles. Bone scrapes on bone. The construct hauls itself from the silt around the spring, water sluicing from its joints. Eye-pits glow a dull, deep red.")
-engine.fire_event("Awakens", bc_id)
-return true -- handled: suppress default output
-```
+The construct's waking lives where the events actually fire, not on the room
+(`touch` emits `OnTouch` at the touched *thing*): [Spring Water](#Spring%20Water)'s
+`On Touch` wakes the [Bone Construct](#Bone%20Construct) and opens the ambush;
+the construct's own `On Damage` wakes it if struck while dormant.
