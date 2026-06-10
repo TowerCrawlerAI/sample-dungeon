@@ -11,27 +11,17 @@
 
 > The [Skull King](#Skull%20King) on his throne; four [Skeleton Archers](#Skeleton%20Archer) in the gallery with three-quarters cover; the chandelier-skull casts dim light around the room edges and bright light at the center. The Skull King opens with a courteous greeting and a single question — "Why have you come?" — and waits one round for an answer before initiative is rolled.
 
-#### Triggers
+#### Implementation notes
 
-###### On Start
+This encounter is wired in the entities themselves, not here:
 
-```luau
-local self_id = _find_entity("throne_audience")
-if self_id then
-    engine.set_property(self_id, "triggered", "true")
-end
-engine.output("The Skull King stirs on his throne. Four skeleton archers raise their bows from the gallery above. He regards you with empty eye sockets and speaks in a measured, resonant voice: \"Why have you come?\"")
-```
-
-###### On RoundStart
-
-- when: flag(skull_king_true_name) and not flag(name_spoken)
-
-**If** party declares speak_name:
-  Set [name_spoken](flag:name_spoken)
-  Clear [skull_king_true_name](flag:skull_king_true_name)
-  Apply stunned for 1 round to [Skull King](#Skull%20King)
-  **Loop through** skeleton_archers in throne_audience:
-    Clear reactions from current for this round
-  **End.**
-**End.**
+- **The ambush** — [Hall of Skulls](#Hall%20of%20Skulls) `On Enter` announces the
+  audience and emits `BeginCombat` (once, gated by the
+  `throne_audience_started` world flag); the dnd5e layer opens the
+  enemies-first initiative encounter from the `hostile` flags on the King and
+  the archer.
+- **The true name** — the [Skull King](#Skull%20King) `On Answer` trigger: speaking
+  ALDRIC (once, and only if `skull_king_true_name` has been learned) stuns him
+  for one round (no save) and frightens the gallery archer for the round — the
+  engine has no reaction economy, so "loses its reaction" lowers to the
+  mildest real debuff. Sets `name_spoken` so the spoken name is spent.
