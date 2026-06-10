@@ -32,8 +32,6 @@ pip install "fml_parser @ git+https://github.com/TowerCrawlerAI/clotho@main"
 
 # Lower:
 make lower          # writes build/floor.lua
-# or:
-scripts/lower.sh    # same, shell-only alternative
 ```
 
 The Makefile target is incremental — it only re-lowers when `index.md` changes.
