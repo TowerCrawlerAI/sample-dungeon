@@ -2,7 +2,6 @@
 
 [stdlib](stdlib)
 
-[The Adventurer](people/the_adventurer.md)
 [Skull King](people/skull_king.md)
 [Skeleton Archer](people/skeleton_archer.md)
 [Skeleton Scavenger](people/skeleton_scavenger.md)
