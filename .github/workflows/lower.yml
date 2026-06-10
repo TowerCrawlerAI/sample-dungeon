@@ -24,10 +24,17 @@ jobs:
         # The floor imports the stdlib catalog; CI has no sibling clone, so fetch
         # it and point the parser at it via FML_STDLIB_PATH (resolution order in
         # fml_parser _resolve_import_path). TODO(F4): pin to a released stdlib.
+        #
+        # The checkout dir MUST be named `stdlib`: the parser classifies
+        # stdlib-sourced entities (pruneable catalog content) by the path
+        # containing a `stdlib` component (fml_parser/parser.py,
+        # is_stdlib_import). A previous `_stdlib` name defeated that check, so
+        # tree-shake kept the whole catalog and the lowered floor (~1600 lines,
+        # 72 engine.define_verb blocks) failed to load in the engine.
         uses: actions/checkout@v4
         with:
           repository: TowerCrawlerAI/stdlib
-          path: _stdlib
+          path: stdlib
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -42,7 +49,7 @@ jobs:
 
       - name: Lower index.md → build/floor.lua
         env:
-          FML_STDLIB_PATH: ${{ github.workspace }}/_stdlib/index.md
+          FML_STDLIB_PATH: ${{ github.workspace }}/stdlib/index.md
         run: make lower
 
       - name: Upload floor.lua artifact
