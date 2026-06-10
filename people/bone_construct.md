@@ -57,15 +57,17 @@
 ###### On Damage
 
 ```luau
--- A blow wakes the dormant guardian: it turns hostile and the ambush opens.
+-- A blow wakes the dormant guardian: it stands and turns hostile. NO
+-- BeginCombat emit here — OnDamage fires inside the attack resolution, and
+-- opening + advancing an encounter mid-resolve would let a faster foe act
+-- twice (the attack behaviour advances again after resolving). The fight
+-- opens player-initiated on the next strike instead; the wake blow is free.
 -- (Touching the rib is the usual wake path — see Spring Water's On Touch.)
 local bc = ctx.target
 if wyrd.get(bc, "awake") ~= true then
     wyrd.set(bc, "awake", true)
     wyrd.set(bc, "hostile", true)
     wyrd.say("The half-buried thing you struck is not a ruin. It is a sleeper. The construct heaves itself upright, silt cascading from its ribs.")
-    local room = wyrd.neighbors(bc, "in", "out")[1]
-    if room then wyrd.emit(room, "BeginCombat", { actor = ctx.actor }) end
 end
 ```
 

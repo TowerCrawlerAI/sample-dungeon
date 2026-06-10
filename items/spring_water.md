@@ -26,7 +26,7 @@ local room = wyrd.neighbors(rib, "in", "out")[1]
 if room == nil then return end
 local bc = nil
 for _, id in ipairs(wyrd.neighbors(room, "in", "in")) do
-    if string.find(string.lower(wyrd.get(id, "name") or ""), "construct") then
+    if string.lower(wyrd.get(id, "name") or "") == "bone construct" then
         bc = id
         break
     end
