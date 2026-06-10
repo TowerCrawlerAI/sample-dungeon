@@ -112,10 +112,33 @@ end
 ###### On Answer
 
 ```luau
--- Riddle victory: he bound himself to yield to whoever names the answer (skull).
 local sk = ctx.target
 local said = string.lower(ctx.phrase or "")
-if string.find(said, "skull") then
+-- The true name: speaking ALDRIC aloud — once, and only if the party has
+-- learned it (the Sigil or the Hanged Corpse) — staggers him: stunned for one
+-- round, no save, and the archer in the gallery falters (frightened for the
+-- round; the engine has no reaction economy, so "loses its reaction" lowers
+-- to the mildest real debuff). One-shot: the spoken name is spent.
+-- duration=2, not 1: conditions tick at the round-boundary, and when the King
+-- out-initiatives the player (his usual luck) his turn comes AFTER the wrap —
+-- duration 1 would lapse at the tick before ever costing him the turn.
+if string.find(said, "aldric")
+   and wyrd.get_world("skull_king_true_name") == "true"
+   and wyrd.get_world("name_spoken") ~= "true" then
+    wyrd.set_world("name_spoken", "true")
+    wyrd.overlay_add({ target = sk, property = "stunned", op = "tag", duration = 2 })
+    local room = wyrd.neighbors(sk, "in", "out")[1]
+    if room then
+        for _, id in ipairs(wyrd.neighbors(room, "in", "in")) do
+            local nm = string.lower(wyrd.get(id, "name") or "")
+            if string.find(nm, "archer") and (wyrd.get(id, "hp") or 0) > 0 then
+                wyrd.overlay_add({ target = id, property = "frightened", op = "tag", duration = 2 })
+            end
+        end
+    end
+    wyrd.say("\"ALDRIC.\" The name leaves your mouth like a struck bell. The Skull King goes rigid on his throne — the flame behind his teeth shrinks to a pinpoint — and above you a bowstring sags. For one breath, the Hall forgets to be his.")
+-- Riddle victory: he bound himself to yield to whoever names the answer (skull).
+elseif string.find(said, "skull") then
     wyrd.set(sk, "hp", 0)
     wyrd.set(sk, "defeated", true)
     wyrd.set(sk, "awaiting_answer", false)
