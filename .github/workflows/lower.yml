@@ -59,3 +59,14 @@ jobs:
           path: build/floor.lua
           if-no-files-found: error
           retention-days: 30
+
+      # `make lower` now also emits build/map.json (the --map sidecar).
+      # if-no-files-found: error makes this the gate: CI fails if the map
+      # sidecar wasn't produced, so the --map wiring can't silently regress.
+      - name: Upload map.json artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: floor-map
+          path: build/map.json
+          if-no-files-found: error
+          retention-days: 30
