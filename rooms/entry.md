@@ -8,8 +8,8 @@
 - luminosity: 10
 - hidden: DC 12 Perception detects the things beneath the silt. Parties that linger or argue loudly for more than 10 in-fiction minutes trigger the [Gate Ambush](#Gate%20Ambush).
 - map:
-  - width: 29
-  - height: 29
+  - width: 6
+  - height: 6
   - image: sample-dungeon/img/rooms/entry_background.jpg
 
 > The entrance to the Garden proper is a gate of welded vertebrae, each disc the size of a shield, and beyond it the path forks. To the [north](#Hall%20of%20Skulls), the silt is trampled into a road by something heavy and recent; the road climbs toward the [Hall of Skulls](#Hall%20of%20Skulls). To the [west](#Ossuary), the bone trees grow thicker, and between them a half-buried doorway hints at an older site: the [Ossuary](#Ossuary), reputed to be where the best treasures still lie undisturbed by the current sovereign's tax-collectors.

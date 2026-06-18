@@ -2,6 +2,10 @@
 
 - exits:
   - south: [Entry](#Entry)
+- map:
+  - width: 8
+  - height: 8
+  - image: sample-dungeon/img/rooms/entry_background.jpg
 
 > The Hall of Skulls itself is a low basilica of bone, lit by oil-lamps suspended in the eye-sockets of a chandelier-skull the size of a small house. At the far end, on a throne assembled from the spines of three different giants, sits the [Skull King](#Skull%20King). His court of [Skeleton Archers](#Skeleton%20Archer) occupies the gallery above the floor and shoots through arrow-slits worked into the wall behind his throne.
 
