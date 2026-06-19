@@ -6,6 +6,7 @@
 - map:
   - width: 29
   - height: 29
+  - image: sample-dungeon/img/rooms/ossuary_background.jpg
 
 > The Ossuary is silent in a way the rest of the Garden is not. The bone trees do not clatter near its threshold. A long descending corridor opens into a series of low vaulted chambers stacked floor-to-ceiling with disarticulated remains: shins in one bay, ribs in the next, hands cradling hands cradling hands until they ascend into the dark.
 
