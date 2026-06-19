@@ -8,6 +8,7 @@
 - map:
   - width: 29
   - height: 29
+  - image: sample-dungeon/img/rooms/garden_background.jpg
 
 > The Garden proper — the flat silt expanse and bone forest that the [Entry](#Entry) gate opens into. Beyond the floor's two main destinations, the Garden is alive with smaller dangers and small mercies.
 
