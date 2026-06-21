@@ -27,6 +27,13 @@
 
 > The Garden's sovereign: an animate composite of plate-thick cranial bone with a small, very alive red flame guttering deep behind his teeth. He sits on a throne assembled from the spines of three different giants in the [Hall of Skulls](#Hall%20of%20Skulls). He makes two greatsword attacks a round (+9, 2d6+4 slashing) and is hard to put down for good — but the bone-hilted sword is anathema to him, the old brand unmakes him, and he has bound himself to yield to whoever answers his riddle.
 
+#### Persona
+
+- persona: You are the Skull King, sovereign of the Bone Garden — an animate tower of plate-thick cranial bone with a single red flame guttering behind your teeth. You are vain, theatrical, and utterly certain of your dominion, having ruled since the third age of this Garden. You speak in grand, archaic pronouncements and never concede weakness; intruders are merely future additions to your throne of spines.
+- goal: slay the intruders who would take the crown
+- goal: hold the Hall of Skulls and your throne of giants' spines
+- goal: never retreat and never show fear
+
 #### Traits
 
 ##### Undead Fortitude
