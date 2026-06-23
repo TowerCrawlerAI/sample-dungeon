@@ -1,11 +1,10 @@
 # Entry
 
 - exits:
-  - north:
-    - room: hall_of_skulls
-    - enter_at: [14, 3, 0]
+  - north: [Towards Castle](#Hall%20of%20Skulls)
   - west: [Towards Tower](#Ossuary)
   - south: [Follow Canyon](#Garden)
+- entrance: [0, 14, 0]
 - outdoor: true
 - luminosity: 10
 - hidden: DC 12 Perception detects the things beneath the silt. Parties that linger or argue loudly for more than 10 in-fiction minutes trigger the [Gate Ambush](#Gate%20Ambush).
