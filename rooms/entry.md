@@ -1,7 +1,9 @@
 # Entry
 
 - exits:
-  - north: [Towards Castle](#Hall%20of%20Skulls)
+  - north:
+    - room: hall_of_skulls
+    - enter_at: [14, 3, 0]
   - west: [Towards Tower](#Ossuary)
   - south: [Follow Canyon](#Garden)
 - outdoor: true

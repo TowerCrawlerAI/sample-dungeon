@@ -24,6 +24,7 @@
 - senses: darkvision 120 ft, passive Perception 13
 - adjudicator: The Skull King is the visible boss of this floor. Defeating him completes the [Claim the Crown](#Claim%20the%20Crown) quest.
 - at_location: hall_of_skulls
+- position: [14, 2, 0]
 
 > The Garden's sovereign: an animate composite of plate-thick cranial bone with a small, very alive red flame guttering deep behind his teeth. He sits on a throne assembled from the spines of three different giants in the [Hall of Skulls](#Hall%20of%20Skulls). He makes two greatsword attacks a round (+9, 2d6+4 slashing) and is hard to put down for good — but the bone-hilted sword is anathema to him, the old brand unmakes him, and he has bound himself to yield to whoever answers his riddle.
 
