@@ -22,13 +22,19 @@
 ###### On Enter
 
 ```luau
--- Throne Audience: entering the Hall springs the fight. The Skull King and his
--- archer are flagged `hostile`, so emitting BeginCombat lets the dnd5e layer
--- open an enemies-first initiative encounter (the engine materialises the
--- hostility edges to the player). Fires once.
+-- Throne Audience (audience-first): the Skull King grants an audience rather
+-- than ambushing. He greets the intruder and WAITS — the encounter design says
+-- he "waits one round for an answer before initiative is rolled" — so this hook
+-- only announces the audience; it does NOT emit BeginCombat. The party then has
+-- its chance to take a victory path before any blade is drawn:
+--   • answer the riddle (ask the King about it, then `answer <skull>`),
+--   • throw the Sigil at him, or
+--   • strike first (the `attack` verb opens the fight; the King + his archer are
+--     `hostile`, so the dnd5e layer materialises the enemies-aware encounter).
+-- Entering no longer drops a fresh, gear-less character straight into a CR-8
+-- alpha-strike. Fires once.
 if not wyrd.get_world("throne_audience_started") then
     wyrd.set_world("throne_audience_started", "true")
     wyrd.say("The Skull King stirs on his throne. A skeleton archer raises its bow from the gallery above. He regards you with empty eye sockets and speaks in a measured, resonant voice: \"Why have you come?\"")
-    wyrd.emit(ctx.place or ctx.target, "BeginCombat", { actor = ctx.actor })
 end
 ```
