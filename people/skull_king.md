@@ -15,7 +15,7 @@
 - attack_bonus: 9
 - damage: "2d6+4"
 - damage_type: slashing
-- attacks: 2
+- attacks: 1
 - immune_necrotic: true
 - immune_poison: true
 - hostile: true
@@ -26,7 +26,7 @@
 - at_location: hall_of_skulls
 - position: [0, -1, 0]
 
-> The Garden's sovereign: an animate composite of plate-thick cranial bone with a small, very alive red flame guttering deep behind his teeth. He sits on a throne assembled from the spines of three different giants in the [Hall of Skulls](#Hall%20of%20Skulls). He makes two greatsword attacks a round (+9, 2d6+4 slashing) and is hard to put down for good — but the bone-hilted sword is anathema to him, the old brand unmakes him, and he has bound himself to yield to whoever answers his riddle.
+> The Garden's sovereign: an animate composite of plate-thick cranial bone with a small, very alive red flame guttering deep behind his teeth. He sits on a throne assembled from the spines of three different giants in the [Hall of Skulls](#Hall%20of%20Skulls). He makes a single, ruinous greatsword attack a round (+9, 2d6+4 slashing) and is hard to put down for good — but the bone-hilted sword is anathema to him, the old brand unmakes him, and he has bound himself to yield to whoever answers his riddle.
 
 #### Persona
 
