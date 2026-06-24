@@ -17,12 +17,13 @@ This encounter is wired in the entities themselves, not here:
 
 - **Solo balance pass** — the Bone Garden is played solo (one dynamically-spawned
   protagonist), so the Hall is tuned for a single adventurer rather than a party
-  of four: a lone gallery archer (not four), and the Skull King makes a single
-  greatsword attack a round (`attacks: 1`, not the party-scaled multiattack) so
-  his opening turn can't delete a fresh character before they act. He keeps his
-  AC 20 / 180 hp / Undead Fortitude boss identity — the solo win is a *victory
-  path* (the bone-hilted sword, the hurled Sigil, or simply answering the riddle
-  — "skull"), not a raw-damage race.
+  of four: a lone gallery archer (not four), the Skull King makes a single
+  greatsword attack a round (`attacks: 1`, not the party-scaled multiattack), and
+  his damage is softened (`2d6`, was `2d6+4`) so his opening turns can't delete a
+  fresh character — a default adventurer (hp 60) now survives ~12 rounds, ample
+  time to act. He keeps his AC 20 / 180 hp / Undead Fortitude boss identity — the
+  solo win is a *victory path* (the bone-hilted sword, the hurled Sigil, or simply
+  answering the riddle — "skull"), not a raw-damage race.
 
 - **The ambush** — [Hall of Skulls](#Hall%20of%20Skulls) `On Enter` announces the
   audience and emits `BeginCombat` (once, gated by the
