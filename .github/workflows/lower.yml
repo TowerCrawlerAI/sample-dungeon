@@ -83,8 +83,14 @@ jobs:
               got = art.get("src") if art else None
               if got != want:
                   errors.append(f"  {room_id}: expected {want!r}, got {got!r}")
-              elif got.startswith(("http://", "https://", "/")):
-                  errors.append(f"  {room_id}: src must be relative, got {got!r}")
+          # Independently assert NO room's art.src is absolute (a resolver/Clotho
+          # regression that injected a host would surface here, even if the exact
+          # expected-path map above were updated). Checks every room with art, not
+          # just the four expected ones.
+          for room_id, room in rooms.items():
+              src = (room.get("art") or {}).get("src")
+              if isinstance(src, str) and src.startswith(("http://", "https://", "/")):
+                  errors.append(f"  {room_id}: art.src must be relative, got {src!r}")
           if errors:
               print("FAIL: map.json art.src mismatch:", file=sys.stderr)
               for e in errors:
