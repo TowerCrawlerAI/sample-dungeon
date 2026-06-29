@@ -52,6 +52,47 @@ jobs:
           FML_STDLIB_PATH: ${{ github.workspace }}/stdlib/index.md
         run: make lower
 
+      # Assert that every room with authored art has the correct relative art.src
+      # in map.json — no absolute URL injected at lowering time (the resolver in
+      # Shuttle is the only place that composes absolute URLs per §40 of the
+      # static-assets design). This is the round-trip check the §31 acceptance
+      # criteria require: FML image: → Clotho → map.json rooms.<id>.art.src must
+      # carry the exact relative logical path, verbatim.
+      - name: Assert art.src round-trips in map.json
+        run: |
+          python3 - <<'EOF'
+          import json, sys
+          with open("build/map.json") as f:
+              m = json.load(f)
+          rooms = m.get("rooms", {})
+          # Expected: the relative logical paths that match the static-assets layout
+          # (static-assets/sample-dungeon/img/rooms/<name>_background.jpg) and the
+          # sync-assets.mjs mapping (→ public/art/<same path>).
+          # The resolver (assets.ts, default base /art) composes:
+          #   resolveAssetUrl("sample-dungeon/img/rooms/entry_background.jpg")
+          #   → /art/sample-dungeon/img/rooms/entry_background.jpg
+          expected = {
+              "entry":         "sample-dungeon/img/rooms/entry_background.jpg",
+              "garden":        "sample-dungeon/img/rooms/garden_background.jpg",
+              "hall_of_skulls": "sample-dungeon/img/rooms/hall_of_skulls_background.jpg",
+              "ossuary":       "sample-dungeon/img/rooms/ossuary_background.jpg",
+          }
+          errors = []
+          for room_id, want in expected.items():
+              art = rooms.get(room_id, {}).get("art")
+              got = art.get("src") if art else None
+              if got != want:
+                  errors.append(f"  {room_id}: expected {want!r}, got {got!r}")
+              elif got.startswith(("http://", "https://", "/")):
+                  errors.append(f"  {room_id}: src must be relative, got {got!r}")
+          if errors:
+              print("FAIL: map.json art.src mismatch:", file=sys.stderr)
+              for e in errors:
+                  print(e, file=sys.stderr)
+              sys.exit(1)
+          print(f"OK: {len(expected)} room art refs round-trip correctly as relative paths.")
+          EOF
+
       - name: Upload floor.lua artifact
         uses: actions/upload-artifact@v4
         with:
