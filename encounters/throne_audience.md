@@ -25,11 +25,15 @@ This encounter is wired in the entities themselves, not here:
   solo win is a *victory path* (the bone-hilted sword, the hurled Sigil, or simply
   answering the riddle — "skull"), not a raw-damage race.
 
-- **The ambush** — [Hall of Skulls](#Hall%20of%20Skulls) `On Enter` announces the
-  audience and emits `BeginCombat` (once, gated by the
-  `throne_audience_started` world flag); the dnd5e layer opens the
-  enemies-first initiative encounter from the `hostile` flags on the King and
-  the archer.
+- **The audience (audience-first)** — [Hall of Skulls](#Hall%20of%20Skulls)
+  `On Enter` only *announces* the audience (once, gated by the
+  `throne_audience_started` world flag) — the King greets the intruder ("Why
+  have you come?") and WAITS. It does **not** emit `BeginCombat`, so a fresh
+  character is never dropped straight into a CR-8 alpha-strike. Combat opens
+  when the party acts: `throw` the Sigil or `attack` the King — the King and
+  the archer are `hostile`, so the dnd5e layer then materialises the
+  enemies-aware initiative encounter. (Answering the riddle wins outright,
+  before any blade is drawn.)
 - **The true name** — the [Skull King](#Skull%20King) `On Answer` trigger: speaking
   ALDRIC (once, and only if `skull_king_true_name` has been learned) stuns him
   for one round (no save) and frightens the gallery archer for the round — the
