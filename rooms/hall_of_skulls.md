@@ -1,7 +1,9 @@
 # Hall of Skulls
 
 - exits:
-  - south: [Entry](#Entry)
+  - south: 
+    - room: [Entry](#Entry)
+    - enter_at: [0, -12, 0]
 - map:
   - width: 29
   - height: 29
